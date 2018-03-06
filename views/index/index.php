@@ -5,7 +5,7 @@
  * Time: 15:09
  */
 
-$this->title = 'My Yii Application';
+$this->title = 'My Yii Index';
 ?>
 <div class="site-index">
 
