@@ -16,9 +16,18 @@ class IndexController extends Controller
 {
     public function actionIndex()
     {
-        echo "aa";
-        return $this->render('index');
-        echo "bb";
+        //return $this->render('index');
+        echo "hello yiidemo";
+        $db = Yii::$app->db;
+        $transaction = $db->beginTransaction();
+        $command = $db->createCommand('select * from country limit 2');
+        $data = $command->queryAll();
+        //$command = $db->createCommand('update country set name=:name where code=:code',[':name'=>'aaa', ':code'=>'aa']);
+        $command = $db->createCommand('update country set population=:population where name=:name',[':name'=>'aaa', ':population'=>10086]);
+        var_dump($command->execute());
+
+        $transaction->commit();
+        var_dump($data);
     }
 
     public function actionSay($msg = 'hello')
