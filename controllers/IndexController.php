@@ -48,8 +48,8 @@ class IndexController extends Controller
     }
     public function actionCountryShow()
     {
+        //var_dump(Yii::$app->getRequest()->getQueryString());exit();
         $query = Country::find();
-
         $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
