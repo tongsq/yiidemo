@@ -10,6 +10,13 @@ $config = [
     //'catchAll' => [
     //    'index/index',
     //],
+    'controllerMap' => [
+        'index2' => 'app\controllers\IndexController',
+    ],
+    'language' => 'zh_CN',
+    'sourceLanguage' => 'zh_CN',
+    'timeZone' => 'Asia/Shanghai',
+    'name' => 'yiidemo',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
