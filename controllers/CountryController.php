@@ -109,6 +109,14 @@ class CountryController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionShow($id)
+    {
+        $model = Country::findOne($id);
+        if ($model === null) {
+            throw new \yii\web\NotFoundHttpException();
+        }
+        $this->redirect(['view', 'id' => $id]);
+    }
     /**
      * Finds the Country model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

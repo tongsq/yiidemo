@@ -14,6 +14,19 @@ use yii\data\Pagination;
 
 class IndexController extends Controller
 {
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => '\yii\web\ErrorAction',
+            ],
+            'hello' => [
+                'class' => 'app\components\HelloWorldAction',
+                'name' => 'World',
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
         //return $this->render('index');
@@ -29,6 +42,7 @@ class IndexController extends Controller
         $transaction->commit();
         var_dump($data);
         var_dump(Yii::$app->params);
+        return 'success';
     }
 
     public function actionSay($msg = 'hello')
@@ -52,6 +66,8 @@ class IndexController extends Controller
         var_dump($countries);
         $country = Country::findOne('US');
         var_dump($country);
+        var_dump($country->toArray());
+        var_dump($country->attributes());
         echo $country->name;
         $country->name = 'U.S.A';
         $country->save();exit();

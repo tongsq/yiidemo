@@ -32,11 +32,12 @@ class HelloController extends Controller
         return ExitCode::OK;
     }
 
-    public function actionTest($msg = 'test')
+    public function actionTest($msg, $msg2 = 'abc')
     {
-        echo $msg . "\n";
+        echo "msg:$msg\t" . "msg2:$msg2" . "\n";
 
         echo ExitCode::OK . "\n";
         return ExitCode::DATAERR;
     }
+
 }

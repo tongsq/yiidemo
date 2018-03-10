@@ -17,6 +17,7 @@ $config = [
     'sourceLanguage' => 'zh_CN',
     'timeZone' => 'Asia/Shanghai',
     'name' => 'yiidemo',
+    'defaultRoute' => 'index',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
