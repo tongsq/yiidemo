@@ -8,6 +8,8 @@ namespace app\modules\demo\controllers;
 use yii\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\ContentNegotiator;
+use yii\web\Response;
 class IndexController extends Controller
 {
     public function behaviors()
@@ -27,6 +29,18 @@ class IndexController extends Controller
                         //'roles' => ['@'],
                         'roles' => ['?'],
                     ],
+                ],
+            ],
+            'resp' => [
+                'class' => ContentNegotiator::className(),
+                'only' => ['resp'],
+                'formats' => [
+                    'application/json' => Response::FORMAT_JSON,
+                    'application/xml' => Response::FORMAT_XML,
+                ],
+                'languages' => [
+                    'en-US',
+                    'de',
                 ],
             ],
         ];
@@ -59,5 +73,10 @@ class IndexController extends Controller
     public function actionAccess()
     {
         return "access filter test";
+    }
+
+    public function actionResp()
+    {
+        return ['aa', 'bb'];
     }
 }
