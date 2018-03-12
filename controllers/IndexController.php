@@ -42,6 +42,7 @@ class IndexController extends Controller
         $transaction->commit();
         var_dump($data);
         var_dump(Yii::$app->params);
+        var_dump(Yii::$app->controller->module);
         return 'success';
     }
 

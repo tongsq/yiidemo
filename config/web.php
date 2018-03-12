@@ -18,6 +18,11 @@ $config = [
     'timeZone' => 'Asia/Shanghai',
     'name' => 'yiidemo',
     'defaultRoute' => 'index',
+    'modules' => [
+        'demo' => [
+            'class' => 'app\modules\demo\Module',
+        ],
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
