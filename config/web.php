@@ -23,6 +23,9 @@ $config = [
             'class' => 'app\modules\demo\Module',
         ],
     ],
+    'as behavior' => [
+        'class' => 'app\components\ActionTimeFilter',
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
