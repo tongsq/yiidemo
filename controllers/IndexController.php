@@ -116,4 +116,45 @@ class IndexController extends Controller
         Yii::setAlias('@example', 'http://example.com/');
         echo Url::to('@example');
     }
+    public function actionRequest()
+    {
+        $request = Yii::$app->request;
+        echo 'request->get(\'id\', 1) : ' . $request->get('id', 1) . '</br>';
+        $params = $request->bodyParams;
+        $id = $request->getBodyParam('id');
+        echo 'the method is : ' . $request->method . "</br>";
+        $userHost = $request->userHost;
+        $userIP = $request->userIP;
+        echo "userHost: {$userHost}, userIp: {$userIP}</br>";
+    }
+    public function actionResponse()
+    {
+        $response = Yii::$app->response;
+        $response->headers->set('Pragma', 'no cache');
+        $response->content = "Hello World";
+        $response->format = \yii\web\Response::FORMAT_JSON;
+        $response->data = ['a', 'b', 'c' => 'cc'];
+        $response->send();
+        echo "aaaa</br>";
+    }
+    public function actionSession()
+    {
+        $session = Yii::$app->session;
+        $msg = $session->get('msg');
+        echo "session msg: {$msg}";
+        $session['msg'] = "hello</br>";
+
+        $cookies = Yii::$app->request->cookies;
+        $msg = $cookies->getValue('msg');
+        $cookie = $cookies->get('msg');
+        $msg2 = '';
+        if ($cookie)
+            $msg2 = $cookie->value;
+        echo "cookie msg: {$msg} {$msg2}</br>";
+        $cookies2 = Yii::$app->response->cookies;
+        $cookies2->add(new \yii\web\Cookie([
+            'name' => 'msg',
+            'value' => 'hello cookie',
+        ]));
+    }
 }
