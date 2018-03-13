@@ -11,6 +11,7 @@ use yii\web\Controller;
 use app\models\index\EntryForm;
 use app\models\index\Country;
 use yii\data\Pagination;
+use yii\helpers\Url;
 
 class IndexController extends Controller
 {
@@ -95,5 +96,24 @@ class IndexController extends Controller
     public function actionWidget()
     {
         return $this->render('widget');
+    }
+    public function actionAlias()
+    {
+        var_dump(Yii::$aliases);
+    }
+    public function actionUrl(){
+        $url = Url::to(['demo/index/url', 'id'=>100]);
+        echo $url . '</br>';
+        $url2 = Url::to(['url', 'msg'=>'test']);
+        echo $url2 . '</br>';
+        $url3 = Url::to(['index/url'], true);
+        echo $url3 , '</br>';
+        $url4 = Url::to([''], 'https');
+        echo $url4 . '</br>';
+        echo 'home(): ' . Url::home() . '</br>';
+        echo 'base(): ' . Url::base() . '</br>';
+        echo 'canonical(): ' . Url::canonical() . '</br>';
+        Yii::setAlias('@example', 'http://example.com/');
+        echo Url::to('@example');
     }
 }

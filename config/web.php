@@ -66,7 +66,10 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
+            'suffix' => '.html',
             'rules' => [
+                'country/<id:\d+>' => 'country/view',
             ],
         ],
         'authManager' => [
