@@ -92,4 +92,8 @@ class IndexController extends Controller
             'pagination' => $pagination,
         ]);
     }
+    public function actionWidget()
+    {
+        return $this->render('widget');
+    }
 }
