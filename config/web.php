@@ -26,6 +26,14 @@ $config = [
     'as behavior' => [
         'class' => 'app\components\ActionTimeFilter',
     ],
+    'container' => [
+        'definitions' => [
+            'yii\widgets\LinkPager' => ['maxButtonCount' => 5]
+        ],
+        'singletons' => [
+            
+        ]
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',

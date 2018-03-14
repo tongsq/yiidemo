@@ -157,4 +157,10 @@ class IndexController extends Controller
             'value' => 'hello cookie',
         ]));
     }
+    public function actionComponent()
+    {
+        $demo = new \app\components\Demo();
+        $demo->name = 'abba';
+        echo $demo->name;
+    }
 }
