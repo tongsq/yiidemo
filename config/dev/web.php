@@ -10,22 +10,27 @@ $config = [
     //'catchAll' => [
     //    'index/index',
     //],
-    'controllerMap' => [
-        'index2' => 'app\controllers\IndexController',
-    ],
+//    'controllerMap' => [
+//        'index2' => 'app\controllers\IndexController',
+//    ],
     'language' => 'zh_CN',
     'sourceLanguage' => 'zh_CN',
     'timeZone' => 'Asia/Shanghai',
     'name' => 'yiidemo',
     'defaultRoute' => 'index',
+    'viewPath' => ROOT . '/views',
+    'vendorPath' => ROOT . '/vendor',
     'modules' => [
         'demo' => [
             'class' => 'app\modules\demo\Module',
         ],
+        'user' => [
+            'class' => 'app\modules\user\User',
+        ],
     ],
-    'as behavior' => [
-        'class' => 'app\components\ActionTimeFilter',
-    ],
+//    'as behavior' => [
+//        'class' => 'app\components\ActionTimeFilter',
+//    ],
     'container' => [
         'definitions' => [
             'yii\widgets\LinkPager' => ['maxButtonCount' => 5]
@@ -35,6 +40,9 @@ $config = [
         ]
     ],
     'aliases' => [
+        '@app' => dirname(dirname(__DIR__)),
+        '@web' => '@app/web',
+        '@vendor' => '@app/vendor',
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
@@ -50,9 +58,9 @@ $config = [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
+//        'errorHandler' => [
+//            'errorAction' => 'site/error',
+//        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -71,17 +79,51 @@ $config = [
         ],
         'db' => $db,
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'enableStrictParsing' => false,
-            //'suffix' => '.html',
-            'rules' => [
-                'country/<id:\d+>' => 'country/view',
-            ],
-        ],
+        'urlManager' => require ROOT . '/config/rewrite.php',
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'converter' => [
+                    'class' => 'yii\web\AssetConverter',
+                    'commands' => [
+                        'less' => ['css', 'lessc {from} {to} --no-color'],
+                        'ts' => ['js', 'tsc --out {to} {from}'],
+                    ],
+                ],
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'js' => [['jquery.js', 'position' => \yii\web\View::POS_HEAD]],
+                ]
+            ],
+            'assetMap' => [
+                'jquery.js' => '@web/js/jquery.min.js',
+//                'yii.js' => '@web/js/yii.js',
+                'bootstrap.js' => '@web/js/bootstrap.js'
+            ],
+            'appendTimestamp' => true,
+        ],
+        'view' => [
+            'class' => 'yii\web\View',
+            'defaultExtension' => 'twig',
+            'renderers' => [
+                'twig' => [
+                    'class' => 'yii\twig\ViewRenderer',
+                    'cachePath' => '@runtime/Twig/cache',
+                    'options' => [
+                        'auto_reload' => true,
+                    ],
+                    'globals' => [
+                        'Url' => ['class' => '\yii\helpers\Url'],
+                        'Html' => ['class' => '\yii\helpers\Html'],
+                        'Breadcrumbs' => ['class' => '\yii\widgets\Breadcrumbs'],
+                    ],
+                    'functions' => require ROOT . '/config/functions.php',
+                    'filters' => require ROOT . '/config/filters.php',
+                    'uses' => ['yii\bootstrap', 'yii\captcha\Captcha'],
+                ],
+            ],
         ],
 
     ],

@@ -1,0 +1,30 @@
+{{ register_asset_bundle('app/assets/AppAsset') }}
+{{ void(this.beginPage()) }}
+<!DOCTYPE html>
+<html lang="{{ app.language }}">
+<head>
+    <meta charset="{{ app.charset }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ html.encode(this.title) }}</title>
+    {{ html.csrfMetaTags | raw }}
+    {{ void(this.head) }}
+    <script>
+
+    </script>
+</head>
+<body>
+{{ void(this.beginBody()) }}
+<div id="wraper">
+    {% include 'header.twig' %}
+    <div class="head-notice"></div>
+    <div id="bodyer">
+        <div class="container">
+            {{ content | raw }}
+        </div>
+    </div>
+    {% include 'footer.twig' %}
+</div>
+{{ void(this.endBody()) }}
+</body>
+</html>
+{{ void(this.endPage()) }}
