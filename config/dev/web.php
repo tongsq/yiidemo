@@ -41,6 +41,7 @@ $config = [
     ],
     'aliases' => [
         '@app' => dirname(dirname(__DIR__)),
+        '@runtime' => '@app/runtime',
         '@web' => '@app/web',
         '@vendor' => '@app/vendor',
         '@bower' => '@vendor/bower-asset',
